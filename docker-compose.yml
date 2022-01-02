@@ -1,0 +1,21 @@
+version: '3.1'
+services:
+  jpa:
+    image: native-compilation:0.0.1-SNAPSHOT
+    ports:
+      - "8080:8080"
+    build:
+      context: .
+    container_name: jpa
+    depends_on:
+      - db
+    environment:
+      - SPRING_R2DBC_URL=jdbc:postgresql://db:5432/messages-db
+      - SPRING_R2DBC_USERNAME=sa
+      - SPRING_R2DBC_PASSWORDsa
+  db:
+    image: 'postgres:13.1'
+    container_name: db
+    environment:
+      - POSTGRES_USER=sa
+      - POSTGRES_PASSWORD=sa

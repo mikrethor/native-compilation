@@ -10,7 +10,9 @@ import org.springframework.nativex.hint.TypeAccess
 import org.springframework.nativex.hint.TypeHint
 
 @TypeHint(types = [Message::class], access = [TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS])
-@TypeHint(types = [SimpleR2dbcRepository::class, ReactiveCrudRepository::class], access = [TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS])
+@TypeHint(types = [
+// SimpleR2dbcRepository::class,
+ ReactiveCrudRepository::class], access = [TypeAccess.DECLARED_CONSTRUCTORS, TypeAccess.DECLARED_METHODS])
 @SpringBootApplication
 class NativeCompilationApplication
 

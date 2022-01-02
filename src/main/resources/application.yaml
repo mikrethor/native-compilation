@@ -3,7 +3,7 @@ spring:
     url: r2dbc:postgresql://localhost:5432/messages-db
     username: sa
     password: sa
-  data:
-    r2dbc:
-      repositories:
-        enabled: true
+#  data:
+#    r2dbc:
+#      repositories:
+#        enabled: true

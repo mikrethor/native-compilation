@@ -105,7 +105,7 @@ class MessagesITTest {
         } When {
             delete("/messages/c2c10312-6b64-478c-be14-f227eea3a767")
         } Then {
-            statusCode(200)
+            statusCode(204)
         } Extract {
             asPrettyString()
         }
@@ -125,7 +125,7 @@ class MessagesITTest {
         } When {
             post("/messages")
         } Then {
-            statusCode(200)
+            statusCode(201)
         } Extract {
             `as`(Message::class.java)
         }
@@ -137,7 +137,6 @@ class MessagesITTest {
     fun `Modify a message`() {
         messageRepository.deleteAll().block()
         val (id, _) = messageRepository.save(Message(message = "My message to modify")).blockOptional().get()
-
 
         val body = """{
         "id": "$id",
