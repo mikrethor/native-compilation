@@ -1,24 +1,25 @@
 version: '3.1'
 services:
-  jpa:
+  r2dbc:
     image: native-compilation:0.0.1-SNAPSHOT
     ports:
       - "8080:8080"
     build:
       context: .
-    container_name: jpa
+    container_name: r2dbc
     depends_on:
       - db
     environment:
-      - SPRING_R2DBC_URL=jdbc:postgresql://db:5432/messages-db
+      - SPRING_R2DBC_URL=r2dbc:postgresql://db:5432/messages-db
       - SPRING_R2DBC_USERNAME=sa
-      - SPRING_R2DBC_PASSWORDsa
+      - SPRING_R2DBC_PASSWORD=sa
   db:
     image: 'postgres:14.1'
-    volumes:
-      - /src/main/resources/install-uuid-ossp.sql:/docker-entrypoint-initdb.d/install-uuid-ossp.sql
-      - /src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
-    container_name: db
     environment:
       - POSTGRES_USER=sa
       - POSTGRES_PASSWORD=sa
+      - POSTGRES_DB=messages-db
+    volumes:
+      - ./src/main/resources/install-uuid-ossp.sql:/docker-entrypoint-initdb.d/install-uuid-ossp.sql
+      - ./src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
+    container_name: db
