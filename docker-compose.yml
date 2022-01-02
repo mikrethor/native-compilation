@@ -14,7 +14,10 @@ services:
       - SPRING_R2DBC_USERNAME=sa
       - SPRING_R2DBC_PASSWORDsa
   db:
-    image: 'postgres:13.1'
+    image: 'postgres:14.1'
+    volumes:
+      - /src/main/resources/install-uuid-ossp.sql:/docker-entrypoint-initdb.d/install-uuid-ossp.sql
+      - /src/main/resources/schema.sql:/docker-entrypoint-initdb.d/schema.sql
     container_name: db
     environment:
       - POSTGRES_USER=sa
